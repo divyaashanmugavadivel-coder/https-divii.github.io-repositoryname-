@@ -1,8 +1,8 @@
 
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
 <head>
-<title>Valentine Love 💕</title>
+<title>Valentine Surprise 💕</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   body{
@@ -11,40 +11,25 @@
     font-family: Arial, sans-serif;
     text-align:center;
     background: linear-gradient(45deg,#ff758c,#ffb199);
-  }
-
-  h1{
-    margin-top:80px;
     color:white;
   }
 
+  h1{ margin-top:70px; }
+
   button{
-    padding:12px 20px;
+    padding:12px 18px;
     margin:10px;
-    font-size:18px;
+    font-size:16px;
     border:none;
     border-radius:10px;
     cursor:pointer;
   }
 
-  #yes{
-    background:#ff2e63;
-    color:white;
-  }
+  #yes{ background:#ff2e63; }
+  #no{ background:#444; position:absolute; }
 
-  #no{
-    background:#444;
-    color:white;
-    position:absolute;
-  }
+  #msg{ margin-top:20px; font-size:20px; padding:0 15px; }
 
-  #msg{
-    margin-top:20px;
-    font-size:22px;
-    color:white;
-  }
-
-  /* flying hearts */
   .heart{
     position:fixed;
     bottom:-10px;
@@ -61,21 +46,17 @@
 
 <body>
 
-<h1>Will you press YES? 💖</h1>
+<h1 id="title">Will you press YES? 💖</h1>
 
-<button id="yes" onclick="yesClick()">Yes 😍</button>
-<button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 😜</button>
+<div id="buttons">
+  <button id="yes" onclick="pressYes()">Yes 😍</button>
+  <button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 😜</button>
+</div>
 
 <div id="msg"></div>
 
 <script>
-// when YES pressed
-function yesClick(){
-  document.getElementById("msg").innerHTML =
-  "Yay 🎉💐🍫🧸❤️ Happy Valentine’s Day!";
-}
-
-// move NO button
+// NO button run
 function moveNo(){
   let btn = document.getElementById("no");
   let x = Math.random() * (window.innerWidth - 80);
@@ -83,18 +64,49 @@ function moveNo(){
   btn.style.left = x + "px";
   btn.style.top = y + "px";
 
-  document.getElementById("msg").innerHTML =
-  "🥺 Please touch YES!";
+  document.getElementById("msg").innerHTML = "🥺 Please touch YES!";
 }
 
-// create flying hearts
+// after YES pressed
+function pressYes(){
+  document.getElementById("title").innerHTML = "Yay 😘💋";
+
+  document.getElementById("msg").innerHTML =
+  "Your my everything 💗<br>\
+  this is our 5th valentines day 💗<br>\
+  and advance happy birthday my dear 😚<br>\
+  I’ll always be with you in every situation da thangoo 🫂<br>\
+  be happy always 💋<br><br>\
+  Happy Valentine’s Day mama 🎀🥺";
+
+  // after few seconds ask gift
+  setTimeout(() => {
+    document.getElementById("title").innerHTML = "What gift do you want? 🎁";
+    document.getElementById("msg").innerHTML = "";
+
+    document.getElementById("buttons").innerHTML = `
+      <button onclick="showGift()">Teddy 🧸</button>
+      <button onclick="showGift()">Chocolate 🍫</button>
+      <button onclick="showGift()">Flowers 💐</button>
+    `;
+  }, 5000);
+}
+
+// show final gift
+function showGift(){
+  document.getElementById("title").innerHTML = "For You 💕";
+  document.getElementById("buttons").innerHTML = "";
+  document.getElementById("msg").innerHTML =
+    "Here is your gift 🎁🧸❤️";
+}
+
+// flying hearts
 setInterval(() => {
   let heart = document.createElement("div");
   heart.className = "heart";
   heart.style.left = Math.random() * 100 + "vw";
   heart.innerHTML = "❤️";
   document.body.appendChild(heart);
-
   setTimeout(()=>{ heart.remove(); }, 5000);
 }, 400);
 </script>
