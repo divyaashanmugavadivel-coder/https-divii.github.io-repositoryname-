@@ -1,18 +1,23 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>Valentine Quiz 💕</title>
+<title>Valentine Love 💕</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   body{
+    margin:0;
+    overflow:hidden;
     font-family: Arial, sans-serif;
     text-align:center;
-    background: linear-gradient(45deg,#ff9a9e,#fad0c4);
-    padding:40px;
+    background: linear-gradient(45deg,#ff758c,#ffb199);
   }
+
   h1{
-    color:#d1005d;
+    margin-top:80px;
+    color:white;
   }
+
   button{
     padding:12px 20px;
     margin:10px;
@@ -21,50 +26,77 @@
     border-radius:10px;
     cursor:pointer;
   }
-  .yes{ background:#ff4d6d; color:white; }
-  .no{ background:#666; color:white; }
-  #output{
+
+  #yes{
+    background:#ff2e63;
+    color:white;
+  }
+
+  #no{
+    background:#444;
+    color:white;
+    position:absolute;
+  }
+
+  #msg{
     margin-top:20px;
     font-size:22px;
+    color:white;
+  }
+
+  /* flying hearts */
+  .heart{
+    position:fixed;
+    bottom:-10px;
+    font-size:20px;
+    animation: floatUp 5s linear infinite;
+  }
+
+  @keyframes floatUp{
+    from{ transform: translateY(0); opacity:1; }
+    to{ transform: translateY(-100vh); opacity:0; }
   }
 </style>
 </head>
 
 <body>
 
-<h1 id="question">Do you like surprises? 🎁</h1>
+<h1>Will you press YES? 💖</h1>
 
-<button class="yes" onclick="nextQuestion()">Yes 💖</button>
-<button class="no" onclick="funnyNo()">No 😜</button>
+<button id="yes" onclick="yesClick()">Yes 😍</button>
+<button id="no" ontouchstart="moveNo()" onmouseover="moveNo()">No 😜</button>
 
-<div id="output"></div>
+<div id="msg"></div>
 
 <script>
-let step = 0;
-
-function nextQuestion(){
-  step++;
-
-  if(step == 1){
-    document.getElementById("question").innerHTML =
-      "Do you like chocolates? 🍫";
-  }
-  else if(step == 2){
-    document.getElementById("question").innerHTML =
-      "Ready for your Valentine gift? 💝";
-  }
-  else{
-    document.getElementById("question").innerHTML =
-      "Happy Valentine’s Day 💕";
-    document.getElementById("output").innerHTML =
-      "Here are your gifts 🎉💐🍫🧸💖";
-  }
+// when YES pressed
+function yesClick(){
+  document.getElementById("msg").innerHTML =
+  "Yay 🎉💐🍫🧸❤️ Happy Valentine’s Day!";
 }
 
-function funnyNo(){
-  document.getElementById("output").innerHTML =
-    "Hehe 😄 Try pressing YES!";
+// move NO button
+function moveNo(){
+  let btn = document.getElementById("no");
+  let x = Math.random() * (window.innerWidth - 80);
+  let y = Math.random() * (window.innerHeight - 40);
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  document.getElementById("msg").innerHTML =
+  "🥺 Please touch YES!";
 }
+
+// create flying hearts
+setInterval(() => {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.innerHTML = "❤️";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{ heart.remove(); }, 5000);
+}, 400);
 </script>
 
 </body>
