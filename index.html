@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine Quiz 💕</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body{
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(45deg,#ff9a9e,#fad0c4);
+    padding:40px;
+  }
+  h1{
+    color:#d1005d;
+  }
+  button{
+    padding:12px 20px;
+    margin:10px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+  }
+  .yes{ background:#ff4d6d; color:white; }
+  .no{ background:#666; color:white; }
+  #output{
+    margin-top:20px;
+    font-size:22px;
+  }
+</style>
+</head>
+
+<body>
+
+<h1 id="question">Do you like surprises? 🎁</h1>
+
+<button class="yes" onclick="nextQuestion()">Yes 💖</button>
+<button class="no" onclick="funnyNo()">No 😜</button>
+
+<div id="output"></div>
+
+<script>
+let step = 0;
+
+function nextQuestion(){
+  step++;
+
+  if(step == 1){
+    document.getElementById("question").innerHTML =
+      "Do you like chocolates? 🍫";
+  }
+  else if(step == 2){
+    document.getElementById("question").innerHTML =
+      "Ready for your Valentine gift? 💝";
+  }
+  else{
+    document.getElementById("question").innerHTML =
+      "Happy Valentine’s Day 💕";
+    document.getElementById("output").innerHTML =
+      "Here are your gifts 🎉💐🍫🧸💖";
+  }
+}
+
+function funnyNo(){
+  document.getElementById("output").innerHTML =
+    "Hehe 😄 Try pressing YES!";
+}
+</script>
+
+</body>
+</html>
